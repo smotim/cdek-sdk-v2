@@ -80,18 +80,7 @@ class Tariff extends Source
      */
     public function setAdditionalOrderTypes(array $additional_order_types)
     {
-        $types_array = [];
-        $types_pattern = Constants::ADDITIONAL_ORDER_TYPES;
-
-        foreach ($additional_order_types as $type) {
-            if (array_key_exists($type, $types_pattern)) {
-                $types_array[] = (string)$type;
-            } else {
-                throw new \InvalidArgumentException('Передан не допустимый код дополнительного типа заказа: ' . $type, 1);
-            }
-        }
-
-        $this->additional_order_types[] = $types_array;
+        $this->additional_order_types = $additional_order_types;
 
         return $this;
     }
