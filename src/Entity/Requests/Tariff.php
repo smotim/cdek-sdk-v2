@@ -37,12 +37,12 @@ class Tariff extends Source
      */
     protected $lang;
 
-//    /**
-//     * Дополнительные типы заказа:
-//     *
-//     * @var string|null
-//     */
-//    protected $additional_order_types;
+    /**
+     * Дополнительные типы заказа:
+     *
+     * @var string|null
+     */
+    protected $additional_order_types;
 
     /**
      * Установка даты и времени планируемой передачи заказа (дата и время в формате ISO 8601: YYYY-MM-DDThh:mm:ss±hhmm).
@@ -71,12 +71,33 @@ class Tariff extends Source
 
         return $this;
     }
-//    public function setAdditionalOrderTypes()
-//    {
-//        $this->additional_order_types = Constants::ADDITIONAL_ORDER_TYPES;
-//    
-//        return $this;
-//    }
+
+    /**
+     * Экспресс-метод. Добавляет дополнительные типы заказа одним методом через массив.
+     *
+     * @param array $types Дополнительные типы заказа
+     *
+     * @return self
+     * @throws \InvalidArgumentException
+     */
+    public function setAdditionalOrderTypes(array $types)
+    {
+        $types_array = [];
+        $types_pattern = Constants::ADDITIONAL_ORDER_TYPES;
+
+        foreach ($types as $type) {
+            if (array_key_exists($type, $types_pattern)) {
+                $types_array[] = $type;
+            } else {
+                throw new \InvalidArgumentException('Передан не допустимый код дополнительного типа заказа: ' . $type, 1);
+            }
+        }
+
+        $this->additional_order_types = $types_array;
+
+        return $this;
+    }
+
     /**
      * Установка валюты, в которой необходимо произвести расчет
      *
