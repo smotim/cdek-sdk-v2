@@ -38,13 +38,6 @@ class Tariff extends Source
     protected $lang;
 
     /**
-     * Дополнительные типы заказа:
-     *
-     * @var array|null
-     */
-    protected $additional_order_types;
-
-    /**
      * Установка даты и времени планируемой передачи заказа (дата и время в формате ISO 8601: YYYY-MM-DDThh:mm:ss±hhmm).
      *
      * @param string $date Дата и время планируемой передачи заказа (дата и время в формате ISO 8601: YYYY-MM-DDThh:mm:ss±hhmm)
@@ -68,19 +61,6 @@ class Tariff extends Source
     public function setType(int $type)
     {
         $this->type = $type;
-
-        return $this;
-    }
-
-    /**
-     * Экспресс-метод. Добавляет дополнительные типы заказа одним методом через массив.
-     *
-     * @param array $additional_order_types
-     * @return self
-     */
-    public function setAdditionalOrderTypes(array $additional_order_types)
-    {
-        $this->additional_order_types = $additional_order_types;
 
         return $this;
     }
