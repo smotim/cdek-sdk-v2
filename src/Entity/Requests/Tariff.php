@@ -75,19 +75,17 @@ class Tariff extends Source
     /**
      * Экспресс-метод. Добавляет дополнительные типы заказа одним методом через массив.
      *
-     * @param array $types Дополнительные типы заказа
-     *
+     * @param array $additional_order_types
      * @return self
-     * @throws \InvalidArgumentException
      */
-    public function setAdditionalOrderTypes(array $types)
+    public function setAdditionalOrderTypes(array $additional_order_types)
     {
         $types_array = [];
         $types_pattern = Constants::ADDITIONAL_ORDER_TYPES;
 
-        foreach ($types as $type) {
+        foreach ($additional_order_types as $type) {
             if (array_key_exists($type, $types_pattern)) {
-                $types_array[] = $type;
+                $types_array[] = (string)$type;
             } else {
                 throw new \InvalidArgumentException('Передан не допустимый код дополнительного типа заказа: ' . $type, 1);
             }
