@@ -40,7 +40,7 @@ class Tariff extends Source
     /**
      * Дополнительные типы заказа:
      *
-     * @var string|null
+     * @var array|null
      */
     protected $additional_order_types;
 
@@ -91,7 +91,7 @@ class Tariff extends Source
             }
         }
 
-        $this->additional_order_types = $types_array;
+        $this->additional_order_types[] = $types_array;
 
         return $this;
     }
