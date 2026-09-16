@@ -181,7 +181,7 @@ final class CdekClientV2
         $json = $response->getBody()->getContents();
         $apiResponse = json_decode($json, true);
 
-        $this->checkErrors($method, $response, $apiResponse);
+        $this->checkErrors($method, $response, $apiResponse, $json);
 
         return $apiResponse;
     }
@@ -315,9 +315,10 @@ final class CdekClientV2
      *
      * @throws CdekV2RequestException
      */
-    private function checkErrors($method, $response, $apiResponse): bool
+    private function checkErrors($method, $response, $apiResponse, string $json): bool
     {
-        if (empty($apiResponse)) {
+        // JSON-массив [] — пустой список (например, подсказка городов ничего не нашла), а не пустой ответ
+        if (empty($apiResponse) && ! is_array(json_decode($json))) {
             throw new CdekV2RequestException('От API CDEK при вызове метода '.$method.' пришел пустой ответ', $response->getStatusCode());
         }
         if (
