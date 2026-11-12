@@ -325,21 +325,21 @@ final class CdekClientV2
             $response->getStatusCode() > 202 && isset($apiResponse['requests'][0]['errors'])
             || isset($apiResponse['requests'][0]['state']) && $apiResponse['requests'][0]['state'] == 'INVALID'
         ) {
-            $message = CdekV2RequestException::getTranslation(
-                $apiResponse['requests'][0]['errors'][0]['code'],
-                $apiResponse['requests'][0]['errors'][0]['message']
+            throw CdekV2RequestException::fromApiError(
+                $method,
+                $apiResponse['requests'][0]['errors'][0],
+                $response->getStatusCode()
             );
-            throw new CdekV2RequestException('От API CDEK при вызове метода '.$method.' получена ошибка: '.$message, $response->getStatusCode());
         }
         if (
             $response->getStatusCode() == 200 && isset($apiResponse['errors'])
             || isset($apiResponse['state']) && $apiResponse['state'] == 'INVALID' || $response->getStatusCode() !== 200 && isset($apiResponse['errors'])
         ) {
-            $message = CdekV2RequestException::getTranslation(
-                $apiResponse['errors'][0]['code'],
-                $apiResponse['errors'][0]['message']
+            throw CdekV2RequestException::fromApiError(
+                $method,
+                $apiResponse['errors'][0],
+                $response->getStatusCode()
             );
-            throw new CdekV2RequestException('От API CDEK при вызове метода '.$method.' получена ошибка: '.$message, $response->getStatusCode());
         }
         if ($response->getStatusCode() > 202 && ! isset($apiResponse['requests'][0]['errors'])) {
             throw new CdekV2RequestException('Неверный код ответа от сервера CDEK при вызове метода 
