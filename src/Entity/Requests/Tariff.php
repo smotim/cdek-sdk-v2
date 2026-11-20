@@ -40,13 +40,13 @@ class Tariff extends Source
     /**
      * Установка даты и времени планируемой передачи заказа (дата и время в формате ISO 8601: YYYY-MM-DDThh:mm:ss±hhmm).
      *
-     * @param string $date Дата и время планируемой передачи заказа (дата и время в формате ISO 8601: YYYY-MM-DDThh:mm:ss±hhmm)
+     * @param \DateTimeInterface|string $date Дата и время планируемой передачи заказа (дата и время в формате ISO 8601: YYYY-MM-DDThh:mm:ss±hhmm)
      *
      * @return self
      */
-    public function setDate(string $date)
+    public function setDate($date)
     {
-        $this->date = $date;
+        $this->date = $date instanceof \DateTimeInterface ? $date->format(\DateTimeInterface::ISO8601) : $date;
 
         return $this;
     }

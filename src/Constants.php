@@ -119,6 +119,13 @@ class Constants
     public const CALC_TARIFFLIST_URL = 'calculator/tarifflist';
 
     /**
+     * URL для получения списока всех доступных и актуальных тарифов по договору.
+     *
+     * @var string
+     */
+    public const AVAILABLE_TARIFF_LIST_URL = 'calculator/alltariffs';
+
+    /**
      * URL для запросов к API договоренностей по времени доставки\приезда курьера, а так же изменять адрес доставки.
      *
      * @var string
@@ -265,6 +272,7 @@ class Constants
         'seller' => 'Seller',
         'recipient' => 'Contact',
         'payment' => 'Money',
+        'additional_order_types_param' => 'TariffAdditionalOrderTypesParam',
     ];
 
     /**
@@ -283,6 +291,7 @@ class Constants
         'requests' => 'Requests',
         'phones' => 'Phone',
         'check_info' => 'Check',
+        'delivery_modes' => 'TariffDeliveryMode',
     ];
 
     public const SERVICE_CODES = [

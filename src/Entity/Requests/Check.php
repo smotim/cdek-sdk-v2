@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright (c) Antistress.Store® 2024. All rights reserved.
  * See LICENSE.md for license details.
@@ -37,5 +38,13 @@ class Check extends Source
         $this->date = $date;
 
         return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getDate()
+    {
+        return $this->date;
     }
 }

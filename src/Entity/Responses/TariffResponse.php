@@ -19,7 +19,7 @@ class TariffResponse extends Source
      * @var float
      */
     protected $delivery_sum;
-    
+
     /**
      * Расчетный вес (в граммах).
      *
